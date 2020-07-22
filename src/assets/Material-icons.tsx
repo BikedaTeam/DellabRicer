@@ -1,0 +1,34 @@
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Reactotron from 'reactotron-react-native'
+
+export const MaterialIconsPack = {
+  name: 'material',
+  icons: createIconsMap(),
+};
+
+function createIconsMap() {
+  return new Proxy({}, {
+    get(target, name) {
+      return IconProvider(name);
+    },
+  });
+}
+
+const IconProvider = (name) => ({
+  toReactElement: (props) => MaterialIcon({ name, ...props }),
+});
+
+function MaterialIcon({ name, style }) {
+  const { height, tintColor, ...iconStyle } = StyleSheet.flatten(style);
+  Reactotron.log("icon name");
+  Reactotron.log(name);
+  return (
+    <Icon
+     name={name}
+      size={height}
+       color={tintColor}
+        style={iconStyle} />
+  );
+}
