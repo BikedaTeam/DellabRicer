@@ -18,7 +18,7 @@ import { HomeDrawer, HomeTabBar } from '../scenes/home';
 import { NoticeScreen, AccInfoScreen, BnkAccInfoScreen, WithdrawalScreen, PointRptScreen, DelRptScreen, AppSettingScreen } from '../scenes/menu';
 
 import { HomeIcon, BullhornIcon, FoodIcon, MotorbikeIcon, CheckboxCircleIcon,
-   AccIcon, ShieldAccIcon, CashRefundAccIcon, PointIcon } from '../assets/icons';
+   AccIcon, ShieldAccIcon, CashRefundAccIcon, PointIcon, ConfigIcon } from '../assets/icons';
 
 type HomeDrawerNavigatorParams = {
   [AppRoute.NOTICE]: undefined;
@@ -161,12 +161,12 @@ export const HomeNavigator = (): React.ReactElement => (
     <Drawer.Screen
       name={AppRoute.DEL_RPT}
       component={DelRptScreen}
-      options={{ title: '대행내역', drawerIcon: MotorbikeIcon}}
+      options={{ title: '대행내역', drawerIcon: MotorbikeIcon }}
     />
     <Drawer.Screen
       name={AppRoute.APP_SET}
       component={AppSettingScreen}
-      options={{ title: '설정' }}
+      options={{ title: '설정', drawerIcon: ConfigIcon }}
     />
   </Drawer.Navigator>
 );

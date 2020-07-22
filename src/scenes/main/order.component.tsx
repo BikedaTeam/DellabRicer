@@ -29,7 +29,9 @@ import { Order } from '../../data/order.model';
 
 let ordersList: Order[] = [];
 
-const getOrderList = () => {
+// const getOrderList = () => {
+function getOrderList() {
+  Reactotron.log("getOrderList");
     axios
       // .get('http://192.168.0.41:8080/api/delivery/delivery'
       .get('http://deliverylabapi.gabia.io/api/delivery/delivery'
@@ -51,7 +53,7 @@ const getOrderList = () => {
           Reactotron.log( order );
           ordersList.push( new Order( order ) );
         }
-        setOrders( ordersList );
+        // setOrders( ordersList );
         Reactotron.log( ordersList );
       })
       .catch(function(error) {
@@ -67,6 +69,9 @@ const getOrderList = () => {
 export const OrderScreen = (props: OrderScreenProps): ListElement => {
 
   getOrderList();
+
+  Reactotron.log("OrderScreen);
+  Reactotron.log(ordersList);
 
   const [orders, setOrders] = React.useState<Order[]>( ordersList );
   const styles = useStyleSheet(themedStyles);
@@ -100,7 +105,7 @@ export const OrderScreen = (props: OrderScreenProps): ListElement => {
           </View>
         </View>
 
-        <View style={styles.controlContainer1}>
+        <View style={styles.tmpTime}>
           <Text status='control'>
             { item.dlvryPickReqTm }분
           </Text>
@@ -123,7 +128,7 @@ export const OrderScreen = (props: OrderScreenProps): ListElement => {
           size='tiny'
           status= 'info'
           appearance='filled'
-          // onPress={getOrderList}
+          onPress={getOrderList}
           >
           전  체
         </Button>
@@ -185,7 +190,7 @@ const themedStyles = StyleService.create({
     backgroundColor: '#3366FF',
     height:20,
   },
-  controlContainer1: {
+  tmpTime: {
     margin: 4,
     paddingHorizontal: 20,
     padding: 35,
@@ -193,8 +198,8 @@ const themedStyles = StyleService.create({
     // backgroundColor: '#00E096',
     backgroundColor: '#FFAA00',
     height:95,
-    marginVertical:-10,
-    marginHorizontal:-10,
+    marginTop:-17,
+    marginRight:-25,
   },
   cardBody:{
     flexDirection: 'row',

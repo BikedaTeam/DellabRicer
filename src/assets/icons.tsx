@@ -1,6 +1,10 @@
 import React from 'react';
 import { Icon, IconElement } from '@ui-kitten/components';
 
+export const LoginIcon = (props): IconElement => (
+  <Icon {...props} name='login' pack='material'/>
+);
+
 export const CreditCardIcon = (props): IconElement => (
   <Icon {...props} name='credit-card' pack='material'/>
 );
@@ -33,9 +37,9 @@ export const ClipboardCheckIcon = (props): IconElement => (
   <Icon {...props} name='bike' pack='material' />
 );
 
-// export const SettingIcon = (props): IconElement => (
-//   <Icon {...props} name='settings-outline' pack='material'/>
-// );
+export const ConfigIcon = (props): IconElement => (
+  <Icon {...props} name='cog-outline' pack='material'/>
+);
 
 export const FoodIcon = (props): IconElement => (
   <Icon {...props} name='food' pack='material'/>

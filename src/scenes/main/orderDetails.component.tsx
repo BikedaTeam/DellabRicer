@@ -26,40 +26,41 @@ export const OrderDetailsScreen = (props: OrderDetailsScreenProps): LayoutElemen
       onBackPress={props.navigation.goBack}
       />
       <Divider/>
-      <OrderDetailText
-        style={styles.setting}
-        hint='상호'
-        value={order.stoMtlty}
-      />
-      <OrderDetailText
-        style={styles.setting}
-        hint='도착지'
-        value={order.dlvryCusAdres}
-      />
-      <OrderDetailText
-        style={styles.setting}
-        hint='결제종류'
-        value={getPaySe(order.dlvryPaySeCd)}
-      />
-      <OrderDetailText
-        style={styles.setting}
-        hint='결제금액'
-        value={ numberFormat(order.dlvryFoodAmnt) + ' 원' }
-      />
-      <OrderDetailText
-        style={styles.setting}
-        hint='배달수수료'
-        value={ numberFormat(order.dlvryAmnt) + ' 원' }
-      />
-      <OrderDetailText
-        style={styles.setting}
-        hint='배달거리'
-        value= { order.dlvryDstnc + ' Km'}
-      />
+      <View style={ styles.infoArea }>
+        <OrderDetailText
+          style={styles.setting}
+          hint='상호'
+          value={order.stoMtlty}
+        />
+        <OrderDetailText
+          style={styles.setting}
+          hint='도착지'
+          value={order.dlvryCusAdres}
+        />
+        <OrderDetailText
+          style={styles.setting}
+          hint='결제종류'
+          value={getPaySe(order.dlvryPaySeCd)}
+        />
+        <OrderDetailText
+          style={styles.setting}
+          hint='결제금액'
+          value={ numberFormat(order.dlvryFoodAmnt) + ' 원' }
+        />
+        <OrderDetailText
+          style={styles.setting}
+          hint='배달수수료'
+          value={ numberFormat(order.dlvryAmnt) + ' 원' }
+        />
+        <OrderDetailText
+          style={styles.setting}
+          hint='배달거리'
+          value= { order.dlvryDstnc + ' Km'}
+        />
+      </View>
       <Button
-        onPress={props.navigation.goBack}
-        style={styles.detailsContainer}>
-        COMPLETE
+        onPress={props.navigation.goBack}>
+        주문받기
       </Button>
     </Layout>
   );
@@ -83,6 +84,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   safeArea: {
+    flex: 1,
+  },
+  infoArea: {
     flex: 1,
   },
   container: {

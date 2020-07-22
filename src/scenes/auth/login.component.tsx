@@ -8,7 +8,7 @@ import { FormInput } from '../../components/form-input.component';
 import { EyeIcon, EyeOffIcon } from '../../assets/icons';
 import { SignInData, SignInSchema } from '../../data/sign-in.model';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { HomeIcon } from '../../assets/icons';
+import { LoginIcon } from '../../assets/icons';
 
 export const LoginScreen = (props: LoginScreenProps) => {
 
@@ -69,7 +69,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
         </Button>
       </View>
       <Button
-        accessoryLeft={HomeIcon}
+        accessoryLeft={ LoginIcon }
         style={styles.submitButton}
         onPress={props.handleSubmit}>
         로그인
