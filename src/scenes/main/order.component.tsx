@@ -29,59 +29,59 @@ import { Order } from '../../data/order.model';
 
 let ordersList: Order[] = [];
 
-// const getOrderList = () => {
-function getOrderList() {
-  Reactotron.log("getOrderList");
-    axios
-      // .get('http://192.168.0.41:8080/api/delivery/delivery'
-      .get('http://deliverylabapi.gabia.io/api/delivery/delivery'
-      ,{
-        params:{
-          // stoBrcofcId     : 'B0001',
-          // riderId         :
-          // dlvryRecvDtStd  : '20200714130000',
-          // dlvryRecvDtEnd  : '20200714163000',
-          // dlvryStateCd    : '01'
-        }
-      }
-    )
-      .then(function(response) {
-        // handle success
-
-        for( const order of response.data.data )
-        {
-          Reactotron.log( order );
-          ordersList.push( new Order( order ) );
-        }
-        // setOrders( ordersList );
-        Reactotron.log( ordersList );
-      })
-      .catch(function(error) {
-        // handle error
-        alert(error.message);
-      })
-      .finally(function(response) {
-        // always executed
-        // alert('Finally called');
-      });
-  };
-
 export const OrderScreen = (props: OrderScreenProps): ListElement => {
 
-  getOrderList();
-
-  Reactotron.log("OrderScreen);
+  Reactotron.log("OrderScreen");
   Reactotron.log(ordersList);
 
   const [orders, setOrders] = React.useState<Order[]>( ordersList );
   const styles = useStyleSheet(themedStyles);
+
+  const getOrderList = () => {
+  // function getOrderList() {
+    const tmpList: Order[] = [];
+
+    Reactotron.log("getOrderList");
+      axios
+        // .get('http://192.168.0.41:8080/api/delivery/delivery'
+        .get('http://deliverylabapi.gabia.io/api/delivery/delivery'
+        ,{
+          params:{
+            // stoBrcofcId     : 'B0001',
+            // riderId         :
+            // dlvryRecvDtStd  : '20200714130000',
+            // dlvryRecvDtEnd  : '20200714163000',
+            // dlvryStateCd    : '01'
+            }
+          }
+        )
+        .then(function(response) {
+          // handle success
+
+          for( const order of response.data.data )
+          {
+            Reactotron.log( order );
+            tmpList.push( new Order( order ) );
+          }
+          Reactotron.log( tmpList );
+          setOrders( tmpList );
+        })
+        .catch(function(error) {
+          // handle error
+          alert(error.message);
+        })
+        .finally(function(response) {
+          // always executed
+          // alert('Finally called');
+        });
+    };
 
   const navigateOrderDetails = ( orderIndex: number ): void => {
     const { [orderIndex]: order } = ordersList;
     props.navigation.navigate(AppRoute.ORDER_DETAILS, { order });
   };
 
-  const renderOrder = ({ item, index }: ListRenderItemInfo<Todo>): ListItemElement => (
+  const renderOrder = ({ item, index }: ListRenderItemInfo<Order>): ListItemElement => (
     <Card style={styles.card} status='warning' onPress={() => navigateOrderDetails(index)}>
       <View style={styles.cardBody}>
         <View>
