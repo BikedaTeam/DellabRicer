@@ -27,22 +27,10 @@ import axios from 'axios';
 
 import { Order } from '../../data/order.model';
 
-let ordersList: Order[] = [];
-
-export const OrderScreen = (props: OrderScreenProps): ListElement => {
-
-  Reactotron.log("OrderScreen");
-  Reactotron.log(ordersList);
-
-  const [orders, setOrders] = React.useState<Order[]>( ordersList );
-  const styles = useStyleSheet(themedStyles);
-
-  const getOrderList = () => {
+const getOrderList = () :Order=> {
   // function getOrderList() {
     const tmpList: Order[] = [];
-
-    Reactotron.log("getOrderList");
-      axios
+    axios
         // .get('http://192.168.0.41:8080/api/delivery/delivery'
         .get('http://deliverylabapi.gabia.io/api/delivery/delivery'
         ,{
@@ -57,14 +45,11 @@ export const OrderScreen = (props: OrderScreenProps): ListElement => {
         )
         .then(function(response) {
           // handle success
-
           for( const order of response.data.data )
           {
-            Reactotron.log( order );
             tmpList.push( new Order( order ) );
           }
-          Reactotron.log( tmpList );
-          setOrders( tmpList );
+          // setOrders( tmpList );
         })
         .catch(function(error) {
           // handle error
@@ -74,7 +59,19 @@ export const OrderScreen = (props: OrderScreenProps): ListElement => {
           // always executed
           // alert('Finally called');
         });
+
+        return tmpList
     };
+
+let ordersList: Order[] = getOrderList();
+
+export const OrderScreen = (props: OrderScreenProps): ListElement => {
+
+  Reactotron.log("OrderScreen");
+  Reactotron.log(ordersList);
+
+  const [orders, setOrders] = React.useState<Order[]>( ordersList );
+  const styles = useStyleSheet(themedStyles);
 
   const navigateOrderDetails = ( orderIndex: number ): void => {
     const { [orderIndex]: order } = ordersList;
@@ -116,6 +113,7 @@ export const OrderScreen = (props: OrderScreenProps): ListElement => {
 
   return (
     <Layout style={styles.container}>
+    {getOrderList()}
       <Toolbar
         title='14,000'
         backIcon={MenuIcon}
