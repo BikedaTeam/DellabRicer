@@ -10,6 +10,8 @@ import { Order } from '../../data/order.model';
 
 import { OrderDetailText } from './extra/text.component';
 
+import NaverMapView, {Circle, Marker, Path, Polyline, Polygon} from "react-native-naver-map";
+
 export type OrderDetailsRouteParams = {
   order: Order;
 };
@@ -17,7 +19,10 @@ export type OrderDetailsRouteParams = {
 export const OrderDetailsScreen = (props: OrderDetailsScreenProps): LayoutElement => {
 
   const { order } = props.route.params;
-
+  const P0 = {latitude: 37.564362, longitude: 126.977011};
+  const P1 = {latitude: 37.565051, longitude: 126.978567};
+  const P2 = {latitude: 37.565383, longitude: 126.976292};
+  const P4 = {latitude: 37.564834, longitude: 126.977218};
   return (
     <Layout style={styles.safeArea}>
       <Toolbar
@@ -56,6 +61,14 @@ export const OrderDetailsScreen = (props: OrderDetailsScreenProps): LayoutElemen
           hint='배달거리'
           value= { order.dlvryDstnc + ' Km' }
         />
+        <NaverMapView style={{width: '100%', height: '100%'}}
+                      showsMyLocationButton={true}
+                      center={{...P0, zoom: 16}}
+                      onTouch={e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
+                      onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
+                      onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}
+                      useTextureView>
+        </NaverMapView>
       </View>
       <Button
         onPress={props.navigation.goBack}>
