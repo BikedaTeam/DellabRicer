@@ -10,8 +10,6 @@ import { Order } from '../../data/order.model';
 
 import { OrderDetailText } from './extra/text.component';
 
-import { WebView } from 'react-native-webview';
-
 export type OrderDetailsRouteParams = {
   order: Order;
 };
@@ -19,7 +17,6 @@ export type OrderDetailsRouteParams = {
 export const OrderDetailsScreen = (props: OrderDetailsScreenProps): LayoutElement => {
 
   const { order } = props.route.params;
-  const webViewRef = useRef();
 
   return (
     <Layout style={styles.safeArea}>
@@ -60,15 +57,6 @@ export const OrderDetailsScreen = (props: OrderDetailsScreenProps): LayoutElemen
           value= { order.dlvryDstnc + ' Km' }
         />
       </View>
-      <WebView
-        originWhitelist={['*']}
-        // ref = { ( ref )  =>  ( this . webview  =  ref ) }
-        source={{ uri:"file:///android_asset/kakaoMap.js",baseUrl:"file:///android_asset/"}}
-        ref={(ref) => webViewRef.current = ref}
-        style={{marginTop: 20}}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-      />
       <Button
         onPress={props.navigation.goBack}>
         주문받기
