@@ -27,7 +27,7 @@ import axios from 'axios';
 
 import { Order } from '../../data/order.model';
 
-const getOrderList = () :Order=> {
+const getOrderList = () :Order => {
   // function getOrderList() {
     const tmpList: Order[] = [];
     axios
