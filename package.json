@@ -8,7 +8,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "devtools": "react-devtools"
   },
   "dependencies": {
     "@eva-design/eva": "^2.0.0",

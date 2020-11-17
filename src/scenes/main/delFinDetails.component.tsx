@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Layout, LayoutElement, Text, Divider } from '@ui-kitten/components';
 import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context';
-import { OrderDetailsScreenProps } from '../../navigation/order.navigator';
+import { DelFinDetailsScreenProps } from '../../navigation/order.navigator';
 import { Toolbar } from '../../components/toolbar.component';
 import { ImageOverlay } from '../../components/image-overlay.component';
 import { ProgressBar } from '../../components/progress-bar.component';
@@ -10,13 +10,11 @@ import { Order } from '../../data/order.model';
 
 import { DetailText } from './extra/text.component';
 
-import NaverMapView, {Circle, Marker, Path, Polyline, Polygon} from "react-native-naver-map";
-
-export type OrderDetailsRouteParams = {
+export type DelFinDetailsRouteParams = {
   order: Order;
 };
 
-export const OrderDetailsScreen = (props: OrderDetailsScreenProps): LayoutElement => {
+export const DelFinDetailsScreen = (props: DelFinDetailsScreenProps): LayoutElement => {
 
   const { order } = props.route.params;
   const P0 = {latitude: 37.564362, longitude: 126.977011};
@@ -61,19 +59,7 @@ export const OrderDetailsScreen = (props: OrderDetailsScreenProps): LayoutElemen
           hint='배달거리'
           value= { order.dlvryDstnc + ' Km' }
         />
-        <NaverMapView style={{width: '100%', height: '100%'}}
-                      showsMyLocationButton={true}
-                      center={{...P0, zoom: 16}}
-                      onTouch={e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
-                      onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
-                      onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}
-                      useTextureView>
-        </NaverMapView>
       </View>
-      <Button
-        onPress={props.navigation.goBack}>
-        주문받기
-      </Button>
     </Layout>
   );
 };

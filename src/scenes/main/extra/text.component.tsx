@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Divider, Layout, LayoutProps, Text } from '@ui-kitten/components';
 
-export interface OrderDetailTextProps extends LayoutProps {
+export interface DetailTextProps extends LayoutProps {
   hint?: string;
   value: string;
 }
 
-export const OrderDetailText = (props: OrderDetailTextProps): React.ReactElement => {
+export const DetailText = (props: DetailTextProps): React.ReactElement => {
 
   const { style, hint, value, ...layoutProps } = props;
 

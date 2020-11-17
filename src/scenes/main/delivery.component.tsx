@@ -25,59 +25,86 @@ import axios from 'axios';
 
 import { Order } from '../../data/order.model';
 
-const getOrderList = ( setOrders ) :Order=> {
-  // function getOrderList() {
-    const tmpList: Order[] = [];
-    axios
-        // .get('http://192.168.0.41:8080/api/delivery/delivery'
-        .get('http://deliverylabapi.gabia.io/api/delivery/delivery'
-        ,{
-          params:{
-            // stoBrcofcId     : 'B0001',
-            // riderId         :
-            // dlvryRecvDtStd  : '20200714130000',
-            // dlvryRecvDtEnd  : '20200714163000',
-            dlvryStateCd    : '04'
-            }
-          }
-        )
-        .then(function(response) {
-          // handle success
-          for( const order of response.data.data )
-          {
-            tmpList.push( new Order( order ) );
-          }
-          if( null != setOrders )
-            setOrders( tmpList );
-        })
-        .catch(function(error) {
-          // handle error
-          alert(error.message);
-        })
-        .finally(function(response) {
-          // always executed
-          // alert('Finally called');
-        });
-
-        return tmpList
-    };
-
-let ordersList: Order[] = getOrderList();
-
 export const DeliveryScreen = (props: DeliveryScreenProps): ListElement => {
 
-  const [orders, setOrders] = React.useState<Order[]>( ordersList );
+  const [orders, setOrders] = React.useState<Order[]>();
+  const [dlvryStateCd, setDlvryStateCd] = React.useState<String>('04');
+  const [isfoucs, setFoucs] = React.useState<boolean>( true );
   const styles = useStyleSheet(themedStyles);
 
   const navigateOrderDetails = ( orderIndex: number ): void => {
-    const { [orderIndex]: order } = ordersList;
+    const { [orderIndex]: order } = orders;
     props.navigation.navigate(AppRoute.ORDER_DETAILS, { order });
   };
 
+  let dlvryParam = {
+      stoBrcofcId     : 'B0001',
+      riderBrcofcId   : 'B0001',
+      dlvryRecvDtStd  : '20200701000000',
+      dlvryRecvDtEnd  : '202011101125959',
+      dlvryStateCd    : dlvryStateCd
+    };
+
+  const getOrderList = ()=> {
+      const tmpList: Order[] = [];
+      axios
+          // .get('http://192.168.0.41:8080/api/delivery/delivery'
+          // .get('http://deliverylabapi.gabia.io/api/delivery/delivery'
+          .get('http://10.0.2.2:8080/api/branch/realTimeDelivery'
+          ,{
+            params : dlvryParam
+            }
+          )
+          .then(function(response) {
+            // handle success
+            for( const order of response.data.data )
+            {
+              tmpList.push( new Order( order ) );
+            }
+            setOrders( tmpList );
+          })
+          .catch(function(error) {
+            // handle error
+            alert(error.message);
+          })
+          .finally(function(response) {
+            // always executed
+            // alert('Finally called');
+          });
+          return tmpList
+      };
+
   React.useEffect(
-    () => props.navigation.addListener('focus', () => getOrderList( setOrders ) ),
+    () => props.navigation.addListener( 'blur', () => setFoucs(false) ),
     []
   );
+
+  React.useEffect(
+    () => props.navigation.addListener( 'focus', () => setFoucs(true) ),
+    []
+  );
+
+  useInterval( ()=>getOrderList(), isfoucs ? 1000 : null );
+
+  function useInterval(callback, delay) {
+    const savedCallback = React.useRef();
+
+    // Remember the latest callback.
+    React.useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    // Set up the interval.
+    React.useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
 
   const renderOrder = ({ item, index }: ListRenderItemInfo<Order>): ListItemElement => (
     <Card style={styles.card} status='warning' onPress={() => navigateOrderDetails(index)}>
