@@ -1,19 +1,10 @@
 import React from 'react';
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/core';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-import {
-  createMaterialTopTabNavigator,
-  MaterialTopTabBarProps,
-  MaterialTopTabNavigationProp,
-} from '@react-navigation/material-top-tabs';
 import { OrderTabNavigationProp } from './home.navigator';
 import { AppRoute } from './app-routes';
-import {
-  OrderDetailsRouteParams,
-  OrderDetailsScreen,
-  OrderScreen,
-  OrderTabBar,
-} from '../scenes/main';
+import { OrderDetailsRouteParams, OrderDetailsScreen, OrderScreen } from '../scenes/main';
+import { createMaterialTopTabNavigator, MaterialTopTabBarProps, MaterialTopTabNavigationProp, } from '@react-navigation/material-top-tabs';
 import { DoneAllIcon, GridIcon } from '../assets/icons';
 
 type OrderNavigatorParams = {

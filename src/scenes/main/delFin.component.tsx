@@ -1,18 +1,6 @@
 import React from 'react';
 import { ListRenderItemInfo, View } from 'react-native';
-import {
-  Button,
-  Divider,
-  Input,
-  Layout,
-  List,
-  ListElement,
-  ListItem,
-  ListItemElement,
-  StyleService,
-  Text,
-  useStyleSheet,
-  Card,
+import { Divider,Input, Layout, List, ListElement, ListItem, ListItemElement, StyleService, Text, useStyleSheet, Card, Button
 } from '@ui-kitten/components';
 import { DelFinScreenProps } from '../../navigation/order.navigator';
 import { AppRoute } from '../../navigation/app-routes';
@@ -33,9 +21,9 @@ export const DelFinScreen = (props: DelFinScreenProps): ListElement => {
   const [dlvryStateCd, setDlvryStateCd] = React.useState<String>('05');
   const styles = useStyleSheet(themedStyles);
 
-  const navigateOrderDetails = ( orderIndex: number ): void => {
+  const navigateDelFinDetails = ( orderIndex: number ): void => {
     const { [orderIndex]: order } = orders;
-    props.navigation.navigate(AppRoute.ORDER_DETAILS, { order });
+    props.navigation.navigate(AppRoute.DELFIN_DETAILS, { order });
   };
 
   let dlvryParam = {
@@ -81,7 +69,7 @@ export const DelFinScreen = (props: DelFinScreenProps): ListElement => {
   );
 
   const renderOrder = ({ item, index }: ListRenderItemInfo<Order>): ListItemElement => (
-    <Card style={styles.card} status='warning' onPress={() => navigateOrderDetails(index)}>
+    <Card style={styles.card} status='warning' onPress={() => navigateDelFinDetails(index)}>
       <View style={styles.cardBody}>
         <View>
           <Text category='s1'>

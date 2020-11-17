@@ -4,10 +4,12 @@ export enum AppRoute {
   INIT_PASS     = 'Initialization Password',  /*비밀번호 초기화*/
   /**************************로그인**************************/
   /**************************메인화면**************************/
-  ORDER         ='Order',                     /*주문*/
-  ORDER_DETAILS ='Order Details',             /*주문상세*/
-  DELIVERY      ='Delivery',                  /*배달중*/
-  DEL_FIN        ='Delivery Finish',           /*완료*/
+  ORDER             ='Order',                     /*주문*/
+  DELIVERY          ='Delivery',                  /*배달중*/
+  DEL_FIN           ='Delivery Finish',           /*완료*/
+  ORDER_DETAILS     ='Order Details',             /*주문상세*/
+  DELIVERY_DETAILS  ='Delivery Details',       /*주문상세*/
+  DELFIN_DETAILS    ='DelFin Details',           /*주문상세*/
   /**************************메인화면**************************/
   /**************************사이드 매뉴**************************/
   /*NOTICE        ='Notice',                    /*공지*/

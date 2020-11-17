@@ -1,18 +1,6 @@
 import React from 'react';
 import { ListRenderItemInfo, View } from 'react-native';
-import {
-  Button,
-  Divider,
-  Input,
-  Layout,
-  List,
-  ListElement,
-  ListItem,
-  ListItemElement,
-  StyleService,
-  Text,
-  useStyleSheet,
-  Card,
+import { Divider,Input, Layout, List, ListElement, ListItem, ListItemElement, StyleService, Text, useStyleSheet, Card, Button
 } from '@ui-kitten/components';
 import { OrderScreenProps } from '../../navigation/order.navigator';
 import { AppRoute } from '../../navigation/app-routes';
